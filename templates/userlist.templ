@@ -1,0 +1,27 @@
+package templates
+
+import (
+	"fmt"
+	. "github.com/htmx-poc/types"
+)
+
+templ UserList(users []User) {
+	<ul id="userlist">
+		for _, user := range users {
+			@ListUser(user)
+		}
+	</ul>
+}
+
+templ ListUser(user User) {
+	<li>
+		{ user.Name }
+		<button
+			hx-delete={ fmt.Sprintf("/users/%s", user.Name) }
+			hx-target="#userlist"
+			hx-swap="outerHTML"
+		>
+			x
+		</button>
+	</li>
+}

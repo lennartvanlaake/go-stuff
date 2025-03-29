@@ -1,0 +1,23 @@
+package templates 
+
+import . "github.com/htmx-poc/types"
+
+templ Admin(users []User) {
+	@Base() {
+		<main>
+			<h1>The users</h1>
+			@UserList(users)
+			<form
+				hx-post="/admin"
+				hx-target="#userlist"
+				hx-swap="outerHTML"
+			>
+				<label for="fname">name</label>
+				<br/>
+				<input type="text" id="fname" name="fname" value="John"/>
+				<br/>
+				<input type="submit" value="Submit"/>
+			</form>
+		</main>
+	}
+}
